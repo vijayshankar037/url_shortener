@@ -7,7 +7,7 @@
       <p><%= @host +'/' + url.short_url %></p>
       <div>
         <p>Total clicks: <%= url.total_count %> </p>
-        <p>Top Countries: <%= url.top_countries.inspect %> </p>
+        <p>Top Countries: <%= url.top_countries.map {|code| c = ISO3166::Country.new(code); c.data['name']}.join(',') %> </p>
       </div>
     </div>
   <% end %>
