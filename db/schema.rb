@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_06_062742) do
+ActiveRecord::Schema.define(version: 2020_09_06_122453) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,8 +19,20 @@ ActiveRecord::Schema.define(version: 2020_09_06_062742) do
     t.text "original_url"
     t.string "short_url"
     t.string "sanitize_url"
+    t.datetime "expiration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["sanitize_url"], name: "index_shortened_urls_on_sanitize_url", unique: true
   end
 
+  create_table "trackings", force: :cascade do |t|
+    t.bigint "shortened_url_id"
+    t.string "ip"
+    t.string "country"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shortened_url_id"], name: "index_trackings_on_shortened_url_id"
+  end
+
+  add_foreign_key "trackings", "shortened_urls"
 end

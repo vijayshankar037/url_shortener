@@ -1,0 +1,15 @@
+<h2>Analytics</h2>
+
+  <% @urls.each do |url| %>
+  <%#= url.inspect %>
+  <div class="block">
+      <h5><%= url.original_url %></h5>
+      <p><%= @host +'/' + url.short_url %></p>
+      <div>
+        <p>Total clicks: <%= url.total_count %> </p>
+        <p>Top Countries: <%= url.top_countries.inspect %> </p>
+      </div>
+    </div>
+  <% end %>
+
+<%= will_paginate @urls %>
