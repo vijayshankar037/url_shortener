@@ -1,24 +1,23 @@
-# README
+# ShortenUrl App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## SETUP
 
-Things you may want to cover:
+Some basic Git commands are:
+```
+git clone git@github.com:vijayshankar037/url_shortener.git
+cd url_shortener
+bundle install
+rake db:create db:migrate db:seed
+```
+## urls
+ Following URL short the url
+  http://localhost:5000/
 
-* Ruby version
+  ![UrlShortener](https://user-images.githubusercontent.com/6635787/92331208-a279bc80-f092-11ea-9a05-1b8e5195c40f.png)
 
-* System dependencies
+Following URL list the stats for each link
+  http://localhost:5000/stats
+  ![stats](https://user-images.githubusercontent.com/6635787/92331210-a73e7080-f092-11ea-89f5-3b47654f4114.png)
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Expiration
+ When user create a shorter URI we set the `expiration` of `30 days` if that time expires user will get the 404 message. 
