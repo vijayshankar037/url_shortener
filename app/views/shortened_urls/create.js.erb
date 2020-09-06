@@ -1,0 +1,9 @@
+$('#short_url #errors').append('')
+<% if @url.errors.any? %>
+  $('#errors').append("<%= escape_javascript render(:partial => 'shared/validation-messages', :locals => { :object => @url }) %>");
+<% else %>
+  $('#short_url_link').append("<%= escape_javascript render(:partial => 'shorten-url', :locals => { :object => @url }) %>");
+<% end %>
+
+
+setInterval(function(){ $("#errors").html('') }, 5000);

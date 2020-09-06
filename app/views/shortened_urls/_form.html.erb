@@ -1,0 +1,3 @@
+<%= form_for @url,  :as => :url, url: shortened_urls_create_path(@url), html:{id:"short_url",remote:true} do |f| %>
+    <%= render 'form-fields', f: f %>
+<% end  %>

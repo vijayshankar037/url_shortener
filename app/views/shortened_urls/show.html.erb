@@ -1,0 +1,5 @@
+<% if @message.present? %>
+  <h1>404: <%= "#{@message}" %>. </h1>
+<% else %>
+  <h1>Your short link is expired.</h1>
+<% end %>
