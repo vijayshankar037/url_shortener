@@ -1,3 +1,3 @@
 class Tracking < ApplicationRecord
-  belongs_to :shortened_url
+  belongs_to :url
 end
