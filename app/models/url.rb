@@ -26,27 +26,9 @@ class Url < ApplicationRecord
           Url.find_by_sanitize_url(self.sanitize_url)
         end
 
-        def new_url?
-          find_duplicate.nil?
-        end
+      
 
-        def sanitize
-          self.original_url.strip!
-          self.sanitize_url = self.original_url.downcase.gsub(/(https?:\/\/)|(www\.)/,"")
-          self.sanitize_url = "http://#{self.sanitize_url}"
-        end
 
-        def set_expiry
-          self.expiration = Time.now.next_month
-        end
-
-        def remaining_days
-          expired? ? 0 : ((self.expiration.to_time - Time.now)/1.day).to_i
-        end
-
-        def expired?
-          (self.expiration.to_time - Time.now)/1.day <= 0
-        end
 
 
 end
