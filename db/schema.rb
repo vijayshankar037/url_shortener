@@ -15,24 +15,23 @@ ActiveRecord::Schema.define(version: 2020_09_06_122453) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "shortened_urls", force: :cascade do |t|
+  create_table "trackings", force: :cascade do |t|
+    t.bigint "url_id"
+    t.string "ip"
+    t.string "country"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["url_id"], name: "index_trackings_on_url_id"
+  end
+
+  create_table "urls", force: :cascade do |t|
     t.text "original_url"
     t.string "short_url"
     t.string "sanitize_url"
     t.datetime "expiration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["sanitize_url"], name: "index_shortened_urls_on_sanitize_url", unique: true
   end
 
-  create_table "trackings", force: :cascade do |t|
-    t.bigint "shortened_url_id"
-    t.string "ip"
-    t.string "country"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["shortened_url_id"], name: "index_trackings_on_shortened_url_id"
-  end
-
-  add_foreign_key "trackings", "shortened_urls"
+  add_foreign_key "trackings", "urls"
 end

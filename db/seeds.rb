@@ -116,7 +116,7 @@ URLS= [
   'https://www.indiatoday.in/movies/celebrities/story/rhea-chakraborty-mega-exclusive-interview-to-rajdeep-sardesai-live-updates-1715815-2020-08-27?utm_source=rhs&utm_medium=It&utm_campaign=readthis&t_source=rhs&t_medium=It&t_campaign=readthis'
 ]
 URLS.each do |url|
-  url = ShortenedUrl.new(original_url:url)
+  url = Url.new(original_url:url)
   url.sanitize_url
   url.save
   puts "Url saved..."

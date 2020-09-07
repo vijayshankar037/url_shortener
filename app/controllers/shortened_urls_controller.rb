@@ -3,7 +3,7 @@ class ShortenedUrlsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @url = ShortenedUrl.new
+    @url = Url.new
   end
 
   def show
@@ -20,7 +20,7 @@ class ShortenedUrlsController < ApplicationController
   end
 
   def create
-    @url = ShortenedUrl.new(url_params)
+    @url = Url.new(url_params)
     @url.sanitize_url
     respond_to do |format|
       if @url.new_url?
@@ -43,27 +43,27 @@ class ShortenedUrlsController < ApplicationController
   end
 
   def stats
-    #@urls = ShortenedUrl.includes(:trackings).paginate(page: params[:page], per_page: 30)
-    @urls = ShortenedUrl.preload(:trackings).paginate(page: params[:page],per_page: 30)
+    #@urls = Url.includes(:trackings).paginate(page: params[:page], per_page: 30)
+    @urls = Url.preload(:trackings).paginate(page: params[:page],per_page: 30)
 
     @host = request.host_with_port
   end
 
   def shortened
-    @url = ShortenedUrl.find_by_short_url(params[:short_url])
+    @url = Url.find_by_short_url(params[:short_url])
     host = request.host_with_port
     @short_url = host + '/' + @url.short_url
     @original_url = @url.sanitize_url
   end
 
   def fetch_original_url
-    fetch_url = ShortenedUrl.find_by_short_url(params[:short_url])
+    fetch_url = Url.find_by_short_url(params[:short_url])
     redirect_to fetch_url.sanitize_url
   end
 
   private
   def find_url
-    @url = ShortenedUrl.find_by_short_url(params[:short_url])
+    @url = Url.find_by_short_url(params[:short_url])
   end
 
   def url_params
